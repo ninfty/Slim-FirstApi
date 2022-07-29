@@ -5,6 +5,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Controller\CreateBook;
+use App\Application\Controller\GetBook;
 
 return function (App $app) {
 
@@ -19,6 +20,7 @@ return function (App $app) {
     });
 
     $app->group('/books', function (Group $group) {
-        $group->get('', CreateBook::class);
+        $group->get('', GetBook::class);
+        $group->post('', CreateBook::class);
     });
 };

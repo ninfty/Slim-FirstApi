@@ -9,6 +9,8 @@ services:
       - '9000:9000'
     volumes:
       - ./:/var/www
+    networks:
+      - slim
 
   nginx:
     image: nginx:stable-alpine
@@ -17,5 +19,22 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - app
+    networks:
+      - slim
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    ports:
+      - ${DB_PORT:-3306}:3306
+    networks:
+      - slim
+
+networks:
+  slim:
+    driver: bridge
