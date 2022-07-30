@@ -5,10 +5,12 @@ namespace App\Application\Controller;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class CreateBook
+class CreateBookController
 {
-    public function __invoke(Request $request, Response $response, $args) {
+    public function __invoke(Request $request, Response $response, $args)
+    {
         $data = array('message' => 'test');
+
         $payload = json_encode($data);
 
         $response->getBody()->write($payload);
