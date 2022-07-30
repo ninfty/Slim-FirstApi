@@ -2,12 +2,12 @@
 
 namespace App\Domain\UseCase;
 
-use App\Infrastructure\Repository\BookRepository;
+use App\Domain\Contract\Repository\IBookRepository;
 
 class GetAllBooks
 {
     public function __construct(
-        private BookRepository $bookRepository
+        private IBookRepository $bookRepository
     ) {}
 
     public function execute()

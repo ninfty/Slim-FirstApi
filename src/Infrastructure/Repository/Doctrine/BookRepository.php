@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Infrastructure\Repository;
+namespace App\Infrastructure\Repository\Doctrine;
 
-use App\Domain\Contract\Repository\BookRepositoryInterface;
+use App\Domain\Contract\Repository\IBookRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use App\Domain\Entity\Book;
 
-class BookRepository implements BookRepositoryInterface
+class BookRepository implements IBookRepository
 {
     private EntityRepository $repository;
 

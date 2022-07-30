@@ -2,7 +2,7 @@
 
 namespace App\Domain\Contract\Repository;
 
-interface BookRepositoryInterface
+interface IBookRepository
 {
     public function createBook(string $title): void;
     public function findAllBooks(): array;
