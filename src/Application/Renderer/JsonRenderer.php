@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Application\Response;
+namespace App\Application\Renderer;
 
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
-class JsonResponse
+class JsonRenderer
 {
-    public function response(Response $response, $data, int $statusCode): Response
+    public function json(Response $response, mixed $data, int $statusCode): Response
     {
         $json = json_encode($data);
         $response->getBody()->write($json);
