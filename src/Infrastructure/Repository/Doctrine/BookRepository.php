@@ -11,9 +11,9 @@ class BookRepository implements IBookRepository
 {
     private EntityRepository $repository;
 
-    public function __construct(EntityManager $entity_manager)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->repository = $entity_manager->getRepository(Book::class);
+        $this->repository = $entityManager->getRepository(Book::class);
     }
 
     public function findAllBooks(): array
@@ -33,7 +33,16 @@ class BookRepository implements IBookRepository
 
     public function updateBook(string $bookId, string $title): void
     {
-        //
+        // return $this->repository->findOneBy(['id' => $bookId]);
+
+        $this->repository->createQueryBuilder('book')
+                ->update()
+                ->set('book.title', ':title')
+                ->where('book.id = :bookId')
+                ->setParameter('title', $title)
+                ->setParameter('bookId', $bookId)
+                ->getQuery()
+                ->execute();
     }
 
     public function deleteBook(string $bookId): void

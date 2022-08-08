@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Application\Controller\CreateBookController;
 use App\Application\Controller\GetAllBooksController;
 use App\Application\Controller\GetBookController;
+use App\Application\Controller\UpdateBookController;
 
 return function (App $app) {
 
@@ -22,7 +23,8 @@ return function (App $app) {
 
     $app->group('/books', function (Group $group) {
         $group->get('', GetAllBooksController::class);
-        $group->get('/{id}', GetBookController::class);
         $group->post('', CreateBookController::class);
+        $group->get('/{id}', GetBookController::class);
+        $group->put('/{id}', UpdateBookController::class);
     });
 };
