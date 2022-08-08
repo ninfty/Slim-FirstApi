@@ -4,18 +4,18 @@ namespace App\Application\Controller;
 
 use Slim\Http\Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use App\Domain\UseCase\GetAllBooks;
+use App\Domain\UseCase\GetBook;
 use Fig\Http\Message\StatusCodeInterface;
 
-class GetAllBooksController
+class GetBookController
 {
     public function __construct(
-        private GetAllBooks $getAllBooks,
+        private GetBook $getBook,
     ) {}
 
     public function __invoke(Request $request, Response $response, $args)
     {
-        $data = $this->getAllBooks->execute();
+        $data = $this->getBook->execute($args['id']);
 
         return $response->withJson($data, StatusCodeInterface::STATUS_OK);
     }

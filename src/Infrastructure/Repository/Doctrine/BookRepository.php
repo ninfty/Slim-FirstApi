@@ -16,13 +16,28 @@ class BookRepository implements IBookRepository
         $this->repository = $entity_manager->getRepository(Book::class);
     }
 
+    public function findAllBooks(): array
+    {
+        return $this->repository->findAll();
+    }
+
+    public function findBookById(string $bookId): Book
+    {
+        return $this->repository->findOneBy(['id' => $bookId]);
+    }
+
     public function createBook(string $title): void
     {
         //
     }
 
-    public function findAllBooks(): array
+    public function updateBook(string $bookId, string $title): void
     {
-        return $this->repository->findAll();
+        //
+    }
+
+    public function deleteBook(string $bookId): void
+    {
+        //
     }
 }
