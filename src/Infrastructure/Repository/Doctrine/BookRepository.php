@@ -45,6 +45,11 @@ class BookRepository implements IBookRepository
 
     public function deleteBook(string $bookId): void
     {
-        //
+        $this->repository->createQueryBuilder('book')
+                ->delete()
+                ->where('book.id = :bookId')
+                ->setParameter('bookId', $bookId)
+                ->getQuery()
+                ->execute();
     }
 }

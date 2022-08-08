@@ -30,4 +30,7 @@ $middleware($app);
 $routes = require __DIR__ . '/../config/routes.php';
 $routes($app);
 
+// (require __DIR__ . '/../config/routes/index.php')($app);
+// (require __DIR__ . '/../config/routes/book.php')($app);
+
 return $app;
