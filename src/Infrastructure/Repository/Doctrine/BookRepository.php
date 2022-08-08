@@ -33,8 +33,6 @@ class BookRepository implements IBookRepository
 
     public function updateBook(string $bookId, string $title): void
     {
-        // return $this->repository->findOneBy(['id' => $bookId]);
-
         $this->repository->createQueryBuilder('book')
                 ->update()
                 ->set('book.title', ':title')

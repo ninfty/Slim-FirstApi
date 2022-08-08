@@ -3,6 +3,7 @@
 namespace App\Domain\UseCase;
 
 use App\Domain\Contract\Repository\IBookRepository;
+use App\Domain\Entity\Book;
 
 class UpdateBook
 {
@@ -10,9 +11,11 @@ class UpdateBook
         private IBookRepository $bookRepository
     ) {}
 
-    public function execute(string $bookId, string $title)
+    public function execute(string $bookId, string $title): Book
     {
-        $book = $this->bookRepository->updateBook($bookId, $title);
+        $this->bookRepository->updateBook($bookId, $title);
+
+        $book = $this->bookRepository->findBookById($bookId);
         
         return $book;
     }

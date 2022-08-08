@@ -15,7 +15,9 @@ class UpdateBookController
 
     public function __invoke(Request $request, Response $response, $args)
     {
-        $data = $this->updateBook->execute($args['id'], 'test');
+        $body = $request->getParsedBody();
+        
+        $data = $this->updateBook->execute($args['id'], $body['title']);
 
         return $response->withJson($data, StatusCodeInterface::STATUS_OK);
     }

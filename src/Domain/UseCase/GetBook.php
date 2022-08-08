@@ -3,6 +3,7 @@
 namespace App\Domain\UseCase;
 
 use App\Domain\Contract\Repository\IBookRepository;
+use App\Domain\Entity\Book;
 
 class GetBook
 {
@@ -10,7 +11,7 @@ class GetBook
         private IBookRepository $bookRepository
     ) {}
 
-    public function execute(string $bookId)
+    public function execute(string $bookId): Book
     {
         $book = $this->bookRepository->findBookById($bookId);
         

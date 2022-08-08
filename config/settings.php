@@ -3,8 +3,6 @@
 use DI\ContainerBuilder;
 
 return function (ContainerBuilder $containerBuilder) {
-
-    // Global Settings Object
     $containerBuilder->addDefinitions([
         'settings' => [
             'doctrine' => [
