@@ -9,10 +9,12 @@ use App\Domain\Entity\Book;
 
 class BookRepository implements IBookRepository
 {
+    private EntityManager $entityManager;
     private EntityRepository $repository;
 
     public function __construct(EntityManager $entityManager)
     {
+        $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository(Book::class);
     }
 
@@ -26,9 +28,14 @@ class BookRepository implements IBookRepository
         return $this->repository->findOneBy(['id' => $bookId]);
     }
 
-    public function createBook(string $title): void
+    public function createBook(string $title): Book
     {
-        //
+        $book = new Book($title);
+
+        $this->entityManager->persist($book);
+        $this->entityManager->flush();
+
+        return $book;
     }
 
     public function updateBook(string $bookId, string $title): void

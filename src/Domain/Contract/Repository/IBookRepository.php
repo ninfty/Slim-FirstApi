@@ -8,7 +8,7 @@ interface IBookRepository
 {
     public function findAllBooks(): array;
     public function findBookById(string $bookId): Book;
-    public function createBook(string $title): void;
+    public function createBook(string $title): Book;
     public function updateBook(string $bookId, string $title): void;
     public function deleteBook(string $bookId): void;
 }

@@ -2,20 +2,23 @@
 
 namespace App\Application\Controller;
 
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Http\Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Domain\UseCase\CreateBook;
+use Fig\Http\Message\StatusCodeInterface;
 
 class CreateBookController
 {
+    public function __construct(
+        private CreateBook $createBook,
+    ) {}
+
     public function __invoke(Request $request, Response $response, $args)
     {
-        $data = array('message' => 'test');
+        $body = $request->getParsedBody();
+        
+        $data = $this->createBook->execute($body['title']);
 
-        $payload = json_encode($data);
-
-        $response->getBody()->write($payload);
-
-        return $response
-            ->withHeader('Content-Type', 'application/json');
+        return $response->withJson($data, StatusCodeInterface::STATUS_OK);
     }
 }
