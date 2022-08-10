@@ -31,10 +31,14 @@ class CreateBookController
 
         
         
-        $data = $this->validation->validate($body);
+        
+        if(!$this->validation->validate($body)) {
+            return $response->withJson($this->validation->errors(), StatusCodeInterface::STATUS_BAD_REQUEST);
+        }
 
-        return $response->withJson($data, StatusCodeInterface::STATUS_BAD_REQUEST);
+        return $response->withJson(['message' => 'ok'], StatusCodeInterface::STATUS_OK);
 
+        
 
 
         // $data = $this->createBook->execute($body['title']);
