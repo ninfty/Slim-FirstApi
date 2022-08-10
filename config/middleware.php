@@ -1,7 +1,6 @@
 <?php
 
 use Slim\App;
-use Slim\Middleware\ErrorMiddleware;
 use App\Application\Middleware\JsonMiddleware;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -14,5 +13,10 @@ return function (App $app) {
     $app->addBodyParsingMiddleware();
     $app->addRoutingMiddleware();
     $app->add(JsonMiddleware::class);
-    $app->addErrorMiddleware(true, true, true, $logger);
+
+    $app->addErrorMiddleware(
+        filter_var($_ENV['DISPLAY_ERROR_DETAILS'], FILTER_VALIDATE_BOOLEAN), 
+        filter_var($_ENV['LOG_ERROR_DETAILS'], FILTER_VALIDATE_BOOLEAN),
+        filter_var($_ENV['LOG_ERRORS'], FILTER_VALIDATE_BOOLEAN),
+    $logger);
 };

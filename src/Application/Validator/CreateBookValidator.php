@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Application\Validation;
+namespace App\Application\Validator;
 
 use Respect\Validation\Validator;
 
-class CreateBookValidation extends AbstractValidator
+class CreateBookValidator extends AbstractValidator
 {
     public function rules(): array
     {

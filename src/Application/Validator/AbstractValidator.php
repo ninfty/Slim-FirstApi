@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Validation;
+namespace App\Application\Validator;
 
 use Respect\Validation\Validator;
 use Respect\Validation\Exceptions\NestedValidationException;
