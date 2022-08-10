@@ -4,6 +4,7 @@ namespace App\Application\Validation;
 
 use Respect\Validation\Validator;
 use Respect\Validation\Exceptions\NestedValidationException;
+use Exception;
 
 abstract class AbstractValidator
 {
@@ -14,15 +15,12 @@ abstract class AbstractValidator
         foreach ($this->rules() as $field => $rule) {
             try {
                 $rule->assert($request[$field] ?? null);
-
-                return true;
-                
             } catch (NestedValidationException $e) {
                 $this->errors[$field] = $e->getMessages();
-
-                return false;
             }
         }
+
+        return !$this->errors();
     }
 
     public function errors(): array
